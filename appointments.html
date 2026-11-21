@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book an appointment | Lakeview Patient Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<p class="emergency">In an emergency, call <a href="tel:112">112</a> now. This portal is not for urgent care.</p>
+<header class="site"><div class="wrap">
+<a class="brand" href="index.html">Lakeview Patient Portal</a>
+<nav aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="appointments.html" aria-current="page">Book appointment</a></li><li><a href="lab-reports.html">Lab reports</a></li><li><a href="medical-history.html">Medical history</a></li></ul></nav>
+</div></header>
+<main id="main" class="wrap" tabindex="-1">
+<h1>Book an appointment</h1>
+<p>Fields marked <strong>(required)</strong> must be completed. We will confirm your booking within one working day.</p>
+<div id="errs" class="errsum" role="alert" tabindex="-1" hidden></div>
+<div id="ok" class="okbox" tabindex="-1" role="status" hidden><h2>Request sent</h2><p></p></div>
+<form id="book" action="appointments.html" method="post" novalidate>
+<fieldset><legend>Visit type (required)</legend>
+<label class="choice"><input type="radio" name="visit" id="visit-1" value="In person"> In person</label>
+<label class="choice"><input type="radio" name="visit" value="Video call"> Video call</label>
+<label class="choice"><input type="radio" name="visit" value="Phone call"> Phone call</label>
+<p class="err" id="e-visit" hidden></p></fieldset>
+<fieldset><legend>Who and when</legend>
+<div class="field"><label for="dept">Department (required)</label>
+<select id="dept" name="dept"><option value="">Select a department</option><option>General practice</option><option>Cardiology</option><option>Diabetes clinic</option><option>Eye clinic</option><option>Physiotherapy</option></select><p class="err" id="e-dept" hidden></p></div>
+<div class="field"><label for="date">Preferred date (required)</label><p class="hint" id="dh">Use the format shown by your device, for example 04/11/2026.</p>
+<input id="date" name="date" type="date" aria-describedby="dh"><p class="err" id="e-date" hidden></p></div>
+<fieldset style="border:0;padding:0"><legend>Available times (required)</legend><div class="slots"><label class="choice"><input type="radio" name="time" id="time-1" value="09:00"> 09:00</label><label class="choice"><input type="radio" name="time" id="time-2" value="09:30"> 09:30</label><label class="choice"><input type="radio" name="time" id="time-3" value="10:30"> 10:30</label><label class="choice"><input type="radio" name="time" id="time-4" value="11:00"> 11:00</label><label class="choice"><input type="radio" name="time" id="time-5" value="14:00"> 14:00</label><label class="choice"><input type="radio" name="time" id="time-6" value="15:30"> 15:30</label></div><p class="err" id="e-time" hidden></p></fieldset>
+</fieldset>
+<fieldset><legend>Details</legend>
+<div class="field"><label for="reason">Reason for visit (required)</label><p class="hint" id="rh">A short description is enough. Do not include emergency symptoms here.</p>
+<textarea id="reason" name="reason" aria-describedby="rh"></textarea><p class="err" id="e-reason" hidden></p></div>
+<div class="field"><label for="contact">Confirm by</label><select id="contact" name="contact"><option>email</option><option>phone call</option><option>SMS</option></select></div>
+</fieldset>
+<fieldset><legend>Support you may need (optional)</legend>
+<label class="choice"><input type="checkbox" name="needs" value="wheelchair"> Wheelchair access</label>
+<label class="choice"><input type="checkbox" name="needs" value="interpreter"> Language or sign-language interpreter</label>
+<label class="choice"><input type="checkbox" name="needs" value="longer"> Longer appointment time</label>
+<label class="choice"><input type="checkbox" name="needs" value="large-print"> Large-print or easy-read documents</label>
+</fieldset>
+<button type="submit">Request appointment</button>
+</form>
+</main>
+<footer class="site"><div class="wrap">
+<p><strong>Need help?</strong> Call the patient helpline on <a href="tel:+2340000000000">+234 000 000 0000</a>, weekdays 8am to 6pm.</p>
+<p>Accessibility: this portal is designed to meet WCAG 2.2 AA. Tell us about any barrier at <a href="mailto:access@lakeview.example">access@lakeview.example</a>.</p>
+<p><small>Demo project. All patient data shown is fictional.</small></p>
+</div></footer>
+<script>
+(function(){
+var f=document.getElementById("book"),sum=document.getElementById("errs"),ok=document.getElementById("ok");
+f.date.min=new Date().toISOString().slice(0,10);
+var rules=[["visit","visit-1","Choose a visit type"],["dept","dept","Select a department"],["date","date","Enter a preferred date"],["time","time-1","Choose a time slot"],["reason","reason","Describe the reason for your visit"]];
+f.addEventListener("submit",function(e){
+ e.preventDefault();
+ var bad=[];
+ rules.forEach(function(r){
+  var el=f.elements[r[0]],v=(el.value||"").trim(),m=document.getElementById("e-"+r[0]);
+  var fail=!v;
+  m.hidden=!fail; m.textContent=fail?r[2]:"";
+  if(el.nodeType===1){fail?el.setAttribute("aria-invalid","true"):el.removeAttribute("aria-invalid");}
+  if(fail)bad.push(r);
+ });
+ ok.hidden=true;
+ if(bad.length){
+  sum.innerHTML="<h2>There "+(bad.length>1?"are "+bad.length+" problems":"is 1 problem")+" with your booking</h2><ul>"+bad.map(function(r){return '<li><a href="#'+r[1]+'">'+r[2]+"</a></li>"}).join("")+"</ul>";
+  sum.hidden=false; sum.focus(); return;
+ }
+ sum.hidden=true;
+ ok.querySelector("p").textContent="Your request for "+f.dept.value+" on "+f.date.value+" at "+f.time.value+" has been sent. We will confirm by "+f.contact.value+" within one working day.";
+ ok.hidden=false; ok.focus();
+});
+})();
+</script>
+</body>
+</html>

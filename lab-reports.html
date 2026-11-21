@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab reports | Lakeview Patient Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<p class="emergency">In an emergency, call <a href="tel:112">112</a> now. This portal is not for urgent care.</p>
+<header class="site"><div class="wrap">
+<a class="brand" href="index.html">Lakeview Patient Portal</a>
+<nav aria-label="Main"><ul><li><a href="index.html">Home</a></li><li><a href="appointments.html">Book appointment</a></li><li><a href="lab-reports.html" aria-current="page">Lab reports</a></li><li><a href="medical-history.html">Medical history</a></li></ul></nav>
+</div></header>
+<main id="main" class="wrap" tabindex="-1">
+<h1>Lab reports</h1>
+<p>Results are usually available within two working days. Your doctor will contact you if a result needs action. Status is shown in words and symbols, not colour alone.</p>
+<section class="panel" aria-labelledby="f"><h2 id="f">Filter results</h2>
+<form action="lab-reports.html" method="get" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:end">
+<div style="min-width:220px"><label for="yr">Year</label><select id="yr" name="year"><option>2026</option><option>2025</option><option>2024</option></select></div>
+<div style="min-width:220px"><label for="st">Status</label><select id="st" name="status"><option>All results</option><option>Needs attention</option><option>Normal</option></select></div>
+<button type="submit">Apply filters</button></form></section>
+<section class="panel" aria-labelledby="t"><div class="tw"><table>
+<caption id="t">Results from the last 3 months</caption>
+<thead><tr><th scope="col">Test</th><th scope="col">Date</th><th scope="col">Result</th><th scope="col">Reference range</th><th scope="col">Status</th><th scope="col">Report</th></tr></thead>
+<tbody><tr><th scope="row">Full blood count</th><td><time>20 Oct 2026</time></td><td>13.8 g/dL</td><td>12.0 to 15.5</td><td><span class="badge b-ok"><span aria-hidden="true">&#10003; </span>Normal</span></td><td><a href="#">Download<span class="vh"> Full blood count report (PDF)</span></a></td></tr><tr><th scope="row">Fasting glucose</th><td><time>20 Oct 2026</time></td><td>5.9 mmol/L</td><td>3.9 to 5.5</td><td><span class="badge b-warn"><span aria-hidden="true">&#9650; </span>Slightly high</span></td><td><a href="#">Download<span class="vh"> Fasting glucose report (PDF)</span></a></td></tr><tr><th scope="row">Total cholesterol</th><td><time>20 Oct 2026</time></td><td>4.8 mmol/L</td><td>Below 5.2</td><td><span class="badge b-ok"><span aria-hidden="true">&#10003; </span>Normal</span></td><td><a href="#">Download<span class="vh"> Total cholesterol report (PDF)</span></a></td></tr><tr><th scope="row">Vitamin D</th><td><time>20 Oct 2026</time></td><td>18 ng/mL</td><td>30 to 100</td><td><span class="badge b-bad"><span aria-hidden="true">&#33; </span>Low</span></td><td><a href="#">Download<span class="vh"> Vitamin D report (PDF)</span></a></td></tr><tr><th scope="row">Creatinine</th><td><time>02 Aug 2026</time></td><td>68 &micro;mol/L</td><td>45 to 84</td><td><span class="badge b-ok"><span aria-hidden="true">&#10003; </span>Normal</span></td><td><a href="#">Download<span class="vh"> Creatinine report (PDF)</span></a></td></tr></tbody></table></div>
+<details><summary>What do the statuses mean?</summary><p><strong>Normal</strong> means within the usual range. <strong>Slightly high</strong> or <strong>Low</strong> means outside it. This is not a diagnosis, so please discuss results with your doctor.</p></details></section>
+</main>
+<footer class="site"><div class="wrap">
+<p><strong>Need help?</strong> Call the patient helpline on <a href="tel:+2340000000000">+234 000 000 0000</a>, weekdays 8am to 6pm.</p>
+<p>Accessibility: this portal is designed to meet WCAG 2.2 AA. Tell us about any barrier at <a href="mailto:access@lakeview.example">access@lakeview.example</a>.</p>
+<p><small>Demo project. All patient data shown is fictional.</small></p>
+</div></footer>
+
+</body>
+</html>
